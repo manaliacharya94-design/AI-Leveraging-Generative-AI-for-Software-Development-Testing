@@ -1,11 +1,21 @@
 import streamlit as st
-import sys
-import os
 
-# Correct path for deployment
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC_PATH = os.path.join(BASE_DIR, "src")
+from src.factorial import FactorialCalculator
 
-sys.path.append(SRC_PATH)
+calc = FactorialCalculator()
 
-from factorial import FactorialCalculator
+st.title("Factorial Calculator")
+
+number = st.number_input(
+    "Enter a non-negative integer",
+    min_value=0,
+    max_value=1000,
+    step=1
+)
+
+if st.button("Calculate"):
+    try:
+        result = calc.calculate(number)
+        st.success(f"Result: {result:,}")
+    except Exception as e:
+        st.error(str(e))

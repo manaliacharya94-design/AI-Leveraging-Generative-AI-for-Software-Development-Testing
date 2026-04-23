@@ -1,6 +1,15 @@
 import streamlit as st
+import sys
+import os
 
-from src.factorial import FactorialCalculator
+# Get absolute path to project root
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Add src folder to Python path
+SRC_PATH = os.path.join(BASE_DIR, "src")
+sys.path.append(SRC_PATH)
+
+from factorial import FactorialCalculator
 
 calc = FactorialCalculator()
 
